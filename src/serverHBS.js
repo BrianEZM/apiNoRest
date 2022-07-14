@@ -6,8 +6,6 @@ const app = express()
 const exphbs = require("express-handlebars")
 app.engine(".hbs", exphbs.engine({
     defaultLayout: "main",
-    layoutsDir: __dirname + "./views/layouts",
-    partialsDir: __dirname + "./views/partials",
     extname: ".hbs"
 }));
 
@@ -102,7 +100,7 @@ const archivoApiRouter = new ContenedorApiRouter("productosHBS.txt");
 routerProductos.get('/listar', async (req, res) => {
     let lectura = await fs.promises.readFile("./src/productosHBS.txt", "utf-8")
     let prods = JSON.parse(lectura)
-    res.render("index", { prods } );
+    res.render("layouts/hbs/listar", { prods } );
 })
 
 routerProductos.get('/listar/:id', async (req, res) => {
@@ -115,7 +113,8 @@ routerProductos.get('/listar/:id', async (req, res) => {
     //     return res.send({error: "Producto no encontrado"})
     // }
     const filtered = prods.filter(prod => prod.id == id)
-    res.json(filtered)
+    res.render("layouts/hbs/listarById", { filtered } );
+    // res.json(filtered)
 })
 
 routerProductos.post('/guardar', async (req, res) => {
@@ -125,8 +124,7 @@ routerProductos.post('/guardar', async (req, res) => {
     // req.body.id = Math.round(Math.random() * 9999);
     req.body.id = prods.length + 1;
     archivoApiRouter.save(req.body)
-    // DEVUELVE AL BODY DEL POST PARA CONFIRMAR LA ACCION
-    res.json(req.body)
+    res.redirect('/')
 })
 
 routerProductos.put('/actualizar/:id', (req, res) => {
@@ -161,7 +159,7 @@ routerProductos.delete('/eliminar/:id', async (req, res) => {
 })
 
 // ----------- SERVER
-const PORT = 8080
+const PORT = 8081
 const server = app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${server.address().port}`);
 })
