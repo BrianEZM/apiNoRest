@@ -1,0 +1,26 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  h2, button, span, input, form {
+    margin: 10px 0;
+  }
+  
+  span {
+    font-size: 20px;
+  }
+  
+  button {
+    font-size: 16px;
+    padding: 10px;
+    background-color: cornflowerblue;
+    border: none;
+    border-radius: 10px;
+  }
