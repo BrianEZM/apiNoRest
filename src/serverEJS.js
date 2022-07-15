@@ -21,14 +21,14 @@ class ContenedorApiRouter {
 
     async save(object){
         try {   
-                    let lectura = await fs.promises.readFile(this.fileName, "utf-8")
+                    let lectura = await fs.promises.readFile(`./src/${this.fileName}`, "utf-8", "utf-8")
                     console.log(lectura);
                     let existents = JSON.parse(lectura)
                     console.log(existents);
                     let listObj = [...existents, object]
                     console.log(listObj);
                     // object.id = listObj.length + 1;
-                    await fs.promises.writeFile(this.fileName, JSON.stringify(listObj))
+                    await fs.promises.writeFile(`./src/${this.fileName}`, "utf-8", JSON.stringify(listObj))
                     // return console.log(object.id);
             }
         catch(err){
@@ -93,11 +93,11 @@ class ContenedorApiRouter {
 };
 
 // ------------------ PRODUCTOS (ENTREGABLE)
-const archivoApiRouter = new ContenedorApiRouter("productoEJS.txt");
+const archivoApiRouter = new ContenedorApiRouter("productosEJS.txt");
 
 // DEVUELVE TODOS LOS PRODUCTOS
 routerProductos.get('/listar', async (req, res) => {
-    let lectura = await fs.promises.readFile("./productoEJS.txt", "utf-8")
+    let lectura = await fs.promises.readFile("./productosEJS.txt", "utf-8")
     let prods = JSON.parse(lectura)
     res.json(prods);
 })
@@ -105,7 +105,7 @@ routerProductos.get('/listar', async (req, res) => {
 routerProductos.get('/listar/:id', async (req, res) => {
     const id = Number(req.params.id);
 
-    let lectura = await fs.promises.readFile("./productoEJS.txt", "utf-8")
+    let lectura = await fs.promises.readFile("./productosEJS.txt", "utf-8")
     let prods = JSON.parse(lectura)
 
     if(id < 1 || id > prods.length){
@@ -117,7 +117,7 @@ routerProductos.get('/listar/:id', async (req, res) => {
 
 routerProductos.post('/guardar', async (req, res) => {
     // AGREGA DATO AL ARRAY
-    let lectura = await fs.promises.readFile("./productoEJS.txt", "utf-8")
+    let lectura = await fs.promises.readFile("./productosEJS.txt", "utf-8")
     let prods = JSON.parse(lectura)
     // req.body.id = Math.round(Math.random() * 9999);
     req.body.id = prods.length + 1;
@@ -158,7 +158,7 @@ routerProductos.delete('/eliminar/:id', async (req, res) => {
 })
 
 // ----------- SERVER
-const PORT = 8081
+const PORT = 8083
 const server = app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${server.address().port}`);
 })

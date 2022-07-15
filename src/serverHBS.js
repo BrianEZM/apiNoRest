@@ -108,7 +108,6 @@ routerProductos.get('/listar/:id', async (req, res) => {
 
     let lectura = await fs.promises.readFile("./src/productosHBS.txt", "utf-8")
     let prods = JSON.parse(lectura)
-
     // if(id < 1 || id > prods.length){
     //     return res.send({error: "Producto no encontrado"})
     // }
@@ -118,7 +117,6 @@ routerProductos.get('/listar/:id', async (req, res) => {
 })
 
 routerProductos.post('/guardar', async (req, res) => {
-    // AGREGA DATO AL ARRAY
     let lectura = await fs.promises.readFile("./src/productosHBS.txt", "utf-8")
     let prods = JSON.parse(lectura)
     // req.body.id = Math.round(Math.random() * 9999);

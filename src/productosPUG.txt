@@ -1,0 +1,1 @@
+[{"producto":"PALETA PUMA","precio":"16000","imag":"https://cdn-magento2-media.head.com/wysiwyg/SpeedContentBlock.jpg","id":1},{"producto":"PALETA PUMA","precio":"16000","imag":"https://cdn-magento2-media.head.com/wysiwyg/SpeedContentBlock.jpg","id":2},{"producto":"PALETA PUMA","precio":"16000","imag":"https://cdn-magento2-media.head.com/wysiwyg/SpeedContentBlock.jpg","id":3}]
