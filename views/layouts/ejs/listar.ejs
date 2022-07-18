@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+	<%- include("partials/head"); %>
+	<body>
+		<main class="container-lg p-3">
+			<section class="row justify-content-around"> 
+				<h1 class="col-12 text-center">Lista de productos</h1>
+				<div class="table-responsive">
+                    <table class="table table-dark">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Foto</th>
+                        </tr>
+                        <%prods.forEach(function(prod) {%>
+                            <tr>
+                                <td>
+                                    <%=prod.producto%>
+                                </td>
+                                <td>
+                                    <%=prod.precio%>
+                                </td>
+                                <td><img width="50" src=<%=prod.imag%> alt="not found"></td>
+                            </tr>
+                            <%});%>
+                    </table>
+                </div>
+                
+			</section>
+            <p>
+                <%- include("partials/footer"); %>
+            </p>
+            <div>
+                <a href="/" type="button" class="btn btn-primary">Volver al inicio</button>
+            </div>
+		</main>
+	</body>
+</html>

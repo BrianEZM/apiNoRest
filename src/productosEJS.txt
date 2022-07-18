@@ -1,1 +1,1 @@
-[]
+[{"producto":"Raqueta wilson PRUEBA PERSISTENCIA 1","precio":10100,"imag":"https://http2.mlstatic.com/D_NQ_NP_868903-MLA31035689818_062019-O.webp","id":1},{"producto":"Pala Royal Padel","precio":"32000","imag":"http://d3ugyf2ht6aenh.cloudfront.net/stores/001/408/700/products/empire_nov21-25-de-1531-4bfc5cb441b3bd563a16388160198427-640-0.jpg","id":2}]

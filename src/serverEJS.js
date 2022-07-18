@@ -3,7 +3,7 @@ const app = express()
 const { Router } = require('express')
 const fs = require("fs");
 
-app.set("view engini", "ejs")
+app.set("view engine", "ejs")
 app.set("views", "./views")
 
 app.use(express.static('public'))
@@ -21,15 +21,10 @@ class ContenedorApiRouter {
 
     async save(object){
         try {   
-                    let lectura = await fs.promises.readFile(`./src/${this.fileName}`, "utf-8", "utf-8")
-                    console.log(lectura);
-                    let existents = JSON.parse(lectura)
-                    console.log(existents);
-                    let listObj = [...existents, object]
-                    console.log(listObj);
-                    // object.id = listObj.length + 1;
-                    await fs.promises.writeFile(`./src/${this.fileName}`, "utf-8", JSON.stringify(listObj))
-                    // return console.log(object.id);
+            let lectura = await fs.promises.readFile(`./src/${this.fileName}`, "utf-8")
+            let existents = JSON.parse(lectura)
+            let listObj = [...existents, object]
+            await fs.promises.writeFile(`./src/${this.fileName}`, JSON.stringify(listObj))
             }
         catch(err){
             console.log("ERROR 2 - CREACION DE FILE (save)");
@@ -97,15 +92,15 @@ const archivoApiRouter = new ContenedorApiRouter("productosEJS.txt");
 
 // DEVUELVE TODOS LOS PRODUCTOS
 routerProductos.get('/listar', async (req, res) => {
-    let lectura = await fs.promises.readFile("./productosEJS.txt", "utf-8")
+    let lectura = await fs.promises.readFile("./src/productosEJS.txt", "utf-8")
     let prods = JSON.parse(lectura)
-    res.json(prods);
+    res.render("layouts/ejs/listar", { prods } );
 })
 
 routerProductos.get('/listar/:id', async (req, res) => {
     const id = Number(req.params.id);
 
-    let lectura = await fs.promises.readFile("./productosEJS.txt", "utf-8")
+    let lectura = await fs.promises.readFile("./src/productosEJS.txt", "utf-8")
     let prods = JSON.parse(lectura)
 
     if(id < 1 || id > prods.length){
@@ -117,13 +112,12 @@ routerProductos.get('/listar/:id', async (req, res) => {
 
 routerProductos.post('/guardar', async (req, res) => {
     // AGREGA DATO AL ARRAY
-    let lectura = await fs.promises.readFile("./productosEJS.txt", "utf-8")
+    let lectura = await fs.promises.readFile("./src/productosEJS.txt", "utf-8")
     let prods = JSON.parse(lectura)
     // req.body.id = Math.round(Math.random() * 9999);
     req.body.id = prods.length + 1;
     archivoApiRouter.save(req.body)
-    // DEVUELVE AL BODY DEL POST PARA CONFIRMAR LA ACCION
-    res.json(req.body)
+    res.redirect('/');
 })
 
 routerProductos.put('/actualizar/:id', (req, res) => {

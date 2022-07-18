@@ -27,10 +27,10 @@ class ContenedorApiRouter {
 
     async save(object){
         try {   
-                    let lectura = await fs.promises.readFile(`./src/${this.fileName}`, "utf-8")
-                    let existents = JSON.parse(lectura)
-                    let listObj = [...existents, object]
-                    await fs.promises.writeFile(`./src/${this.fileName}`, JSON.stringify(listObj))
+                let lectura = await fs.promises.readFile(`./src/${this.fileName}`, "utf-8")
+                let existents = JSON.parse(lectura)
+                let listObj = [...existents, object]
+                await fs.promises.writeFile(`./src/${this.fileName}`, JSON.stringify(listObj))
             }
         catch(err){
             console.log("ERROR 2 - CREACION DE FILE (save)");
